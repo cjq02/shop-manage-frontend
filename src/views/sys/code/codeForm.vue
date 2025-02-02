@@ -47,6 +47,7 @@
                   :form-ref="formRef"
                   :default-row-data="defaultRowData"
                   :editable="editable"
+                  add-row-position="bottom"
                   @after-add="afterAdd"
                 >
                   <template #tableColumns="{ getRowIndex }">
@@ -172,24 +173,23 @@ import { baseEmits } from '@/hooks/useBaseForm'
 const emit = defineEmits(baseEmits)
 
 const defaultFormData = {
-  typeCode: '',
-  typeName: '',
   codeList: [],
   deleteCodeList: [],
+  typeCode: '',
+  typeName: '',
 }
 
 const defaultRowData = {
   configCode: '',
   configName: '',
-  remark: '',
-  isDefault: FALSE,
   indexNo: '',
+  isDefault: FALSE,
+  remark: '',
 }
 
 const options = {
   defaultFormData,
   getAction: $api.sys.userApi.getUserById,
-  saveAction: $api.sys.codeApi.saveCodeList,
   getSaveData() {
     return _.map(model.codeList, (item) => {
       return Object.assign(item, {
@@ -198,10 +198,11 @@ const options = {
       })
     })
   },
+  saveAction: $api.sys.codeApi.saveCodeList,
 }
 
 // noinspection JSUnusedGlobalSymbols
-const { formWrapperRefRef, formRef, model, title, save, back, afterBack } = useBaseForm(options, emit)
+const { formWrapperRef, formRef, model, title, save, back, afterBack } = useBaseForm(options, emit)
 
 const { baseFormRules } = useValidator(formRef, model)
 
@@ -216,10 +217,11 @@ const codeListValidator = (rule, value, callback) => {
 }
 
 const rules = reactive({
-  codeList: [{ validator: codeListValidator, trigger: 'blur' }],
+  codeList: [{ trigger: 'blur', validator: codeListValidator }],
 })
 
-async function open({ typeCode, isEnum = FALSE } = {}) {
+async function open(params) {
+  const { typeCode, isEnum = FALSE } = params || {}
   const formFlag = !_.isEmpty(typeCode) ? Constants.formFlag.EDIT : Constants.formFlag.ADD
   editable.value = isEnum === FALSE
   formWrapperRef.value.formFlag = formFlag

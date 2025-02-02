@@ -85,7 +85,7 @@
             </el-table-column>
             <el-table-column label="类型" align="center" width="100">
               <template #default="scope">
-                <el-tag effect="plain" :type="scope.row.codeCategory?.type">{{ scope.row.codeCategory?.name }}</el-tag>
+                <el-tag effect="plain" :type="scope.row.codeCategory?.type || 'primary'">{{ scope.row.codeCategory?.name }}</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="变更状态" align="center" width="120">

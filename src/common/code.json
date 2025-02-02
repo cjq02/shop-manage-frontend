@@ -14,6 +14,26 @@
       }
     ]
   },
+  "CHAT_MESSAGE_TYPE": {
+    "typeName": "CHAT MESSAGE TYPE",
+    "list": [
+      {
+        "configCode": "JOIN",
+        "configName": "Join",
+        "remark": ""
+      },
+      {
+        "configCode": "CHAT",
+        "configName": "Chat",
+        "remark": ""
+      },
+      {
+        "configCode": "LEAVE",
+        "configName": "Leave",
+        "remark": ""
+      }
+    ]
+  },
   "CODE_MODIFY_STATUS": {
     "typeName": "码表枚举匹配状态",
     "list": [

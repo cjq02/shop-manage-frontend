@@ -13,10 +13,11 @@
     <!--nav title-->
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
     <div v-if="settings.showDropdown" class="right-menu rowSC">
-<!--      <el-button style="margin-top: 5px" type="primary" text @click="downloadFile">操作手册</el-button>-->
+      <!--      <el-button style="margin-top: 5px" type="primary" text @click="downloadFile">操作手册</el-button>-->
       <el-button style="margin-top: 5px" type="primary" text class="ml20 mr10" @click="dialogVisible = true">
         咨询电话
       </el-button>
+      <el-button type="primary" @click="openCustomerServiceDialog">客服</el-button>
       <!--      <SizeSelect />-->
       <!--      <LangSelect />-->
       <el-dropdown class="avatar-container right-menu-item" size="default" trigger="click">
@@ -50,6 +51,7 @@
       </div>
       <div class="tc" style="margin-top: 30px"><el-button @click="dialogVisible = false">关 闭</el-button></div>
     </el-dialog>
+    <customer-service-dialog ref="customerServiceDialogRef"></customer-service-dialog>
   </div>
 </template>
 
@@ -58,6 +60,7 @@ import { ElMessage } from 'element-plus'
 
 import ScreenFull from '@/components/ScreenFull/index.vue'
 
+import CustomerServiceDialog from './CustomerServiceDialog/index.vue'
 import Hamburger from './Hamburger'
 
 const state = reactive({
@@ -65,11 +68,12 @@ const state = reactive({
 })
 const store = useStore()
 const router = useRouter()
+const customerServiceDialogRef = ref()
 
 const name = computed(() => store.user.userInfo?.realName)
 const settings = computed(() => store.app.settings)
 const opened = computed(() => store.app.sidebar.opened)
-const toggleSideBar = () => store.app.toggleSideBar()
+const toggleSideBar = () => store.app.toggleSidebar()
 /*
  * 退出登录
  * */
@@ -82,8 +86,11 @@ const logout = () => {
     /* location.reload();*/
   })
 }
-const downloadFile = () => apiUtils.download('/template/operationManual.pdf', { name: 'Shop Manage System操作手册 V1.1.pdf' })
 const { dialogVisible } = toRefs(state)
+
+function openCustomerServiceDialog() {
+  customerServiceDialogRef.value.open()
+}
 </script>
 <!--suppress CssUnknownTarget -->
 <style rel="stylesheet/scss" lang="scss" scoped>

@@ -15,6 +15,18 @@ const Code = {
     },
 
     /*
+    * CHAT MESSAGE TYPE
+    * */
+    CHAT_MESSAGE_TYPE: {
+        /* Join -  */
+        'JOIN': 'JOIN',
+        /* Chat -  */
+        'CHAT': 'CHAT',
+        /* Leave -  */
+        'LEAVE': 'LEAVE',
+    },
+
+    /*
     * 码表枚举匹配状态
     * */
     CODE_MODIFY_STATUS: {

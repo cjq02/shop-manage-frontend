@@ -164,6 +164,7 @@ export function registerProxyEvents(proxy) {
           const res = JSON.parse(buffer.toString())
           Object.keys(res.info).forEach((fileName) => {
             writeFileSync(`src/common/${fileName}`, res.info[fileName])
+            writeFileSync(`../shop-frontend/src/common/${fileName}`, res.info[fileName])
           })
         } catch (e) {
           console.error(e)
